@@ -1,0 +1,6 @@
+file=File.open("./log.txt","w") 
+file.each_line do |lines|
+  #(a)
+  lines=lines.reverse
+  puts lines
+end
