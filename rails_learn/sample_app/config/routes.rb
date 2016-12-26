@@ -1,16 +1,38 @@
 SampleApp::Application.routes.draw do
-  #get "users/new"
-get 'signup' =>'users#new'
+  get "password_resets/new"
 
+  get "password_resets/edit"
+
+  #get "static_pages/about"
   root :to => 'static_pages#home'
 
+  resources :users
+  get     'signup' =>'users#new'
+  get     'signup_show'=>'users#show'
+  post    'create'=>'users#create'
+  get     'edit_user'=>'users#edit'
+  get     'list_user'=>'users#index'
+  delete  'delete_user'=>'users#destroy'
   
-  #get "static_pages/help"
-  get 'help' =>'static_pages#help'
+  get     'login'=>'sessions#new'
+  post    'login' =>'sessions#create'
+  delete  'logout' => 'sessions#destroy'
 
-  get "static_pages/about"
+  get     'help' =>'static_pages#help'
+  get     'about'=>'static_pages#about'
+  get     'contact'=>'static_pages#contact'
+  
+  resources :account_activations,only: [:edit]
+  
+  resources :password_resets, only: [:new,:create,:edit,:update]
 
-  get "static_pages/contact"
+  resources :microposts,only: [:create,:destroy]
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
+  resources :relationships,only:[:create,:destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

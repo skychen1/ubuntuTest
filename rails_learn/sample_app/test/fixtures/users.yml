@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: Example User
+  email: 0@qq.com
+  password_digest: <%=User.digest('password')%>
+  admin: true
+  activated: true
+  activated_at: <%=Time.zone.now%>
