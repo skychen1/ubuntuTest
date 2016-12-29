@@ -1,0 +1,26 @@
+<% provide(:title,@user.name)%>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <%=gravatar_for @user%>
+      <%=@user.name%>
+       <span>
+       <%if @user.microposts.any?%>
+          <%= pluralize(@user.microposts.count,"micropost")%>
+          <span>
+       <%end%>
+    </section>
+    <section>
+      <%= render 'shared/stats' if log_in? %>
+    </section>
+  </aside> 
+ <div class="col-md-8">
+ <%=render 'follow_form'%>
+  <%if @user.microposts.any?%>
+    <ol class="microposts">
+      <%=render @microposts%>
+    </ol>
+  <%end%>
+  <%=will_paginate @microposts%>
+ </div>
+</div>
